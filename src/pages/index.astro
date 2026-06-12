@@ -1,0 +1,442 @@
+---
+// JS/TS here if needed, but none for now
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO -->
+		<title>TempEmail CLI — On-Demand Disposable Email Addresses</title>
+		<meta name="description" content="A premium CLI tool to generate, list, and read temporary emails directly from your terminal. Quick, secure, and developer-friendly." />
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="glow-bg"></div>
+		<main>
+			<header>
+				<div class="logo">
+					<span class="logo-icon">⚡</span>
+					<span class="logo-text">TempEmail <span class="accent-text">CLI</span></span>
+				</div>
+				<div class="status-badge">
+					<span class="pulse-dot"></span>
+					<span class="status-text">System Status: <strong class="working-text">Working</strong></span>
+				</div>
+			</header>
+
+			<section class="hero">
+				<h1 class="hero-title">Disposable Email, <br/><span class="gradient-text">Right in Your Terminal</span></h1>
+				<p class="hero-subtitle">
+					Create temporary mailboxes, fetch messages, and inspect attachments without leaving your command line. The ultimate tool for developers testing email flows.
+				</p>
+				
+				<div class="terminal-container">
+					<div class="terminal-header">
+						<div class="terminal-buttons">
+							<span class="btn red"></span>
+							<span class="btn yellow"></span>
+							<span class="btn green"></span>
+						</div>
+						<span class="terminal-title">bash</span>
+						<button class="copy-btn" id="copyBtn">
+							<span class="copy-icon">📋</span>
+							<span class="copy-text">Copy</span>
+						</button>
+					</div>
+					<div class="terminal-body">
+						<div class="line"><span class="prompt">$</span> <span class="cmd">curl -sSL https://tempemail.sh/install.sh | bash</span></div>
+						<div class="line output">Downloading tempemail-cli v1.0.0...</div>
+						<div class="line output">Installing to /usr/local/bin/tempemail...</div>
+						<div class="line output success">✓ Installation complete! Run 'tempemail --help' to start.</div>
+						<div class="line"><span class="prompt">$</span> <span class="cmd">tempemail create</span></div>
+						<div class="line output success">Created: swift-fox-42@tempemail.sh (Expires in 60m)</div>
+						<div class="line"><span class="prompt">$</span> <span class="cmd">tempemail watch</span></div>
+						<div class="line output">Watching for incoming emails on swift-fox-42@tempemail.sh...</div>
+						<div class="line output info">[16:21:40] New message from "Github" &lt;noreply@github.com&gt;</div>
+						<div class="line output info">Subject: [GitHub] Please verify your email address</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="features">
+				<div class="feature-card">
+					<div class="feature-icon">🛡️</div>
+					<h3>Privacy Focused</h3>
+					<p>No registration, no personal data. Just temporary mailboxes that self-destruct automatically.</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">💻</div>
+					<h3>Developer Friendly</h3>
+					<p>API access, JSON outputs, and beautiful terminal interfaces designed for script scripting and automation.</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">🚀</div>
+					<h3>VPS Ready</h3>
+					<p>Lightweight Node-based CLI or compiled binary. Easy to deploy and run anywhere.</p>
+				</div>
+			</section>
+
+			<footer>
+				<p>© 2026 TempEmail CLI. Built for speed and utility. Ready to host on your VPS.</p>
+			</footer>
+		</main>
+
+		<script>
+			const copyBtn = document.getElementById('copyBtn');
+			if (copyBtn) {
+				copyBtn.addEventListener('click', () => {
+					navigator.clipboard.writeText('curl -sSL https://tempemail.sh/install.sh | bash');
+					const textSpan = copyBtn.querySelector('.copy-text');
+					if (textSpan) {
+						textSpan.textContent = 'Copied!';
+						setTimeout(() => {
+							textSpan.textContent = 'Copy';
+						}, 2000);
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
+
+<style>
+	:root {
+		--bg-color: #0B0F19;
+		--panel-bg: rgba(17, 24, 39, 0.7);
+		--panel-border: rgba(255, 255, 255, 0.08);
+		--text-primary: #F3F4F6;
+		--text-secondary: #9CA3AF;
+		--accent-color: #38BDF8;
+		--accent-gradient: linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
+		--success-color: #34D399;
+		--font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+		--font-mono: 'JetBrains Mono', monospace;
+	}
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		background-color: var(--bg-color);
+		color: var(--text-primary);
+		font-family: var(--font-sans);
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		overflow-x: hidden;
+		position: relative;
+	}
+
+	/* Glow Background Effect */
+	.glow-bg {
+		position: absolute;
+		top: -10%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100vw;
+		height: 600px;
+		background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(129, 140, 248, 0.05) 50%, rgba(11, 15, 25, 0) 70%);
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	main {
+		max-width: 1000px;
+		width: 100%;
+		padding: 2rem;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+	}
+
+	header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-weight: 700;
+		font-size: 1.5rem;
+	}
+
+	.logo-icon {
+		font-size: 1.8rem;
+		animation: hover-float 3s ease-in-out infinite;
+	}
+
+	.accent-text {
+		background: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.status-badge {
+		background: var(--panel-bg);
+		border: 1px solid var(--panel-border);
+		padding: 0.5rem 1rem;
+		border-radius: 9999px;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		backdrop-filter: blur(10px);
+	}
+
+	.pulse-dot {
+		width: 8px;
+		height: 8px;
+		background-color: var(--success-color);
+		border-radius: 50%;
+		position: relative;
+	}
+
+	.pulse-dot::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background-color: var(--success-color);
+		border-radius: 50%;
+		animation: pulse 1.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+	}
+
+	.status-text {
+		font-size: 0.875rem;
+		color: var(--text-secondary);
+	}
+
+	.working-text {
+		color: var(--success-color);
+		font-weight: 600;
+	}
+
+	.hero {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.hero-title {
+		font-size: 3rem;
+		font-weight: 800;
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+	}
+
+	.gradient-text {
+		background: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.hero-subtitle {
+		font-size: 1.125rem;
+		color: var(--text-secondary);
+		max-width: 600px;
+		line-height: 1.6;
+	}
+
+	/* Terminal Design */
+	.terminal-container {
+		width: 100%;
+		max-width: 650px;
+		background: #0f1420;
+		border: 1px solid var(--panel-border);
+		border-radius: 12px;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+		overflow: hidden;
+		margin-top: 1.5rem;
+		text-align: left;
+	}
+
+	.terminal-header {
+		background: #171d2c;
+		padding: 0.75rem 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid var(--panel-border);
+	}
+
+	.terminal-buttons {
+		display: flex;
+		gap: 0.4rem;
+	}
+
+	.terminal-buttons .btn {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		display: inline-block;
+	}
+
+	.btn.red { background-color: #EF4444; }
+	.btn.yellow { background-color: #F59E0B; }
+	.btn.green { background-color: #10B981; }
+
+	.terminal-title {
+		font-size: 0.8rem;
+		color: var(--text-secondary);
+		font-family: var(--font-mono);
+	}
+
+	.copy-btn {
+		background: transparent;
+		border: 1px solid var(--panel-border);
+		color: var(--text-secondary);
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+		font-size: 0.75rem;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		transition: all 0.2s ease;
+	}
+
+	.copy-btn:hover {
+		background: rgba(255, 255, 255, 0.05);
+		color: var(--text-primary);
+	}
+
+	.terminal-body {
+		padding: 1.25rem;
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+		line-height: 1.6;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.line {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.prompt {
+		color: var(--accent-color);
+		user-select: none;
+	}
+
+	.cmd {
+		color: var(--text-primary);
+	}
+
+	.output {
+		color: var(--text-secondary);
+	}
+
+	.success {
+		color: var(--success-color);
+	}
+
+	.info {
+		color: #818CF8;
+	}
+
+	/* Features section */
+	.features {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+		width: 100%;
+	}
+
+	.feature-card {
+		background: var(--panel-bg);
+		border: 1px solid var(--panel-border);
+		padding: 2rem;
+		border-radius: 12px;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		backdrop-filter: blur(10px);
+		transition: transform 0.2s ease, border-color 0.2s ease;
+	}
+
+	.feature-card:hover {
+		transform: translateY(-4px);
+		border-color: rgba(56, 189, 248, 0.3);
+	}
+
+	.feature-icon {
+		font-size: 2rem;
+	}
+
+	.feature-card h3 {
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
+
+	.feature-card p {
+		color: var(--text-secondary);
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	footer {
+		text-align: center;
+		color: var(--text-secondary);
+		font-size: 0.875rem;
+		border-top: 1px solid var(--panel-border);
+		padding-top: 2rem;
+		margin-top: 2rem;
+	}
+
+	/* Animations */
+	@keyframes pulse {
+		0% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+		}
+		70% {
+			transform: scale(1);
+			box-shadow: 0 0 0 6px rgba(52, 211, 153, 0);
+		}
+		100% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+		}
+	}
+
+	@keyframes hover-float {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-4px); }
+	}
+
+	@media (max-width: 640px) {
+		.hero-title {
+			font-size: 2.25rem;
+		}
+		header {
+			flex-direction: column;
+			gap: 1rem;
+		}
+		main {
+			padding: 1rem;
+		}
+	}
+</style>
