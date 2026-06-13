@@ -1,0 +1,43 @@
+{
+  "id": "1781363871006",
+  "from": "\"Nodemailer Tester\" <tester@localdomain.com>",
+  "to": "demo@tempemail.com",
+  "subject": "Test Local Mail — 8:17:50 PM",
+  "text": "Nodemailer local testing working successfully! This message was parsed by smtp-receiver.",
+  "html": "<p>Nodemailer local testing <strong>working successfully!</strong> This message was parsed by smtp-receiver.</p>",
+  "date": "2026-06-13T15:17:50.000Z",
+  "senderIp": "127.0.0.1",
+  "headers": {
+    "from": {
+      "value": [
+        {
+          "address": "tester@localdomain.com",
+          "name": "Nodemailer Tester"
+        }
+      ],
+      "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Nodemailer Tester</span> &lt;<a href=\"mailto:tester@localdomain.com\" class=\"mp_address_email\">tester@localdomain.com</a>&gt;</span>",
+      "text": "\"Nodemailer Tester\" <tester@localdomain.com>"
+    },
+    "to": {
+      "value": [
+        {
+          "address": "demo@tempemail.com",
+          "name": ""
+        }
+      ],
+      "html": "<span class=\"mp_address_group\"><a href=\"mailto:demo@tempemail.com\" class=\"mp_address_email\">demo@tempemail.com</a></span>",
+      "text": "demo@tempemail.com"
+    },
+    "subject": "Test Local Mail — 8:17:50 PM",
+    "message-id": "<992d9017-ff6c-0447-7e5e-e47ffc27488c@localdomain.com>",
+    "date": "2026-06-13T15:17:50.000Z",
+    "mime-version": "1.0",
+    "content-type": {
+      "value": "multipart/alternative",
+      "params": {
+        "boundary": "--_NmP-c471e3e261c25611-Part_1"
+      }
+    }
+  },
+  "attachments": []
+}

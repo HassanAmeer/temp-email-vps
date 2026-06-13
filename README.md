@@ -1,74 +1,46 @@
-# TempEmail CLI Landing Page & Demo Project
+# TempEmail Static Landing Page & Hidden Consoles
 
-This is a premium, developer-focused Astro.js landing page for the **TempEmail CLI** tool. It showcases system status, an interactive terminal mockup with copy-to-clipboard functionality, and key features.
+This project is a secure temporary email dashboard utility built with Astro.js (Tailwind CSS v4 + custom SVG vector icons) and a backend Node.js SMTP server. 
+
+---
+
+## 🔒 Hidden Routes / Backdoor Testing
+
+The default landing page (`/`) is designed as a simple static online check page. It contains **no buttons, links, or navigation options** to the dashboards, making it safe to show to clients.
+
+To access the consoles, you must type the URLs manually:
+* **Local Test Console:** `http://localhost:8081/local`
+* **Live VPS Console:** `http://localhost:8081/live`
 
 ---
 
 ## 🚀 Running Locally
 
-To run this project on your local machine:
+To test everything on your local computer:
 
-1. **Install Dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Start the Dev Server**:
-   ```bash
-   npm run dev
-   ```
-   This will run the site locally at `http://localhost:4321/`.
-
-3. **Build and Preview locally**:
+1. **Build the assets**:
    ```bash
    npm run build
-   npm run preview
    ```
+
+2. **Start the SMTP and HTTP Server**:
+   ```bash
+   npm run mail:start
+   ```
+   * SMTP Server listens on: `2525`
+   * HTTP Web Server listens on: `8081`
+
+3. **Access via browser**:
+   * Open `http://localhost:8081/local` in your browser.
+   * Click the **Send Test Email (Nodemailer)** button at the bottom of the local page to test immediately.
 
 ---
 
-## 🚀 Simple VPS Deployment (Without Docker)
+## 📂 Project Structure
 
-To run this project on your DigitalOcean VPS without Docker:
-
-### Step 1: Upload Files to your VPS
-Upload all the project files (except `node_modules` and `.git` folders) to a directory on your VPS. You can use **SFTP/SCP** or **git** to clone it:
-```bash
-# Example using SCP to copy the project to your VPS (run this from your local computer)
-scp -r /path/to/temp-email user@your_vps_ip:/var/www/temp-email
-```
-
-### Step 2: Install Node.js on the VPS (If not installed)
-Log in to your VPS via SSH and install Node.js (version 20 or newer recommended):
-```bash
-# For Ubuntu/Debian:
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt-get install -y nodejs
-```
-
-### Step 3: Run the Project
-Navigate to the project folder on your VPS and run:
-```bash
-# 1. Install dependencies
-npm install
-
-# 2. Build the Astro project
-npm run build
-
-# 3. Start the server
-npm run start
-```
-
-Your landing page will now be running on port `8080`. You can access it via:
-`http://your_vps_ip:8080`
-
-### 💡 Tips
-* **Change the Port**: You can change the port `8080` to port `80` (or any other port) in [package.json](file:///Users/mac/Documents/react/temp-email/package.json) by editing the `"start": "serve dist -l 8080"` command.
-* **Keep Server Running**: To keep the server running in the background after you close the SSH terminal, you can use `pm2` or `nohup`:
-  ```bash
-  # Install PM2 globally
-  sudo npm install -g pm2
-  
-  # Start the server with PM2
-  pm2 start npm --name "temp-email" -- run start
-  ```
+* **`src/pages/index.astro`**: Clean static landing page (no links to consoles).
+* **`src/pages/local.astro`**: Local SMTP dashboard page.
+* **`src/pages/live.astro`**: Live SMTP dashboard page.
+* **`rmail/rmail.js`**: Backend SMTP receiver (Port 2525) & HTTP API (Port 8081) server.
+* **`rmail/mails-data/local/`**: Local test emails saved here.
+* **`rmail/mails-data/live/`**: Live SMTP emails from public networks saved here.
