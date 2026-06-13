@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "start": "serve dist -l 8080",
     "mail:start": "node rmail/rmail.js",
-    "mail:test": "node smail/smail.js",
+    "mail:test": "node smail/send-mail-local-to-local.js",
+    "mail:send-ip-mail": "node smail/send--mail-from-local-to-live-by-ip.js",
     "astro": "astro"
   },
   "dependencies": {
