@@ -22,9 +22,9 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const IS_DEBUG = process.env.DEBUG === "true";
-const SMTP_PORT = process.env.SMTP_PORT || (IS_DEBUG ? 2525 : 25);
-const HTTP_PORT = process.env.HTTP_PORT || (IS_DEBUG ? 8081 : 80);
+const IS_LIVE = process.env.live !== "false"; // Defaults to true (production) if not set to "false"
+const SMTP_PORT = process.env.SMTP_PORT || (IS_LIVE ? 25 : 2525);
+const HTTP_PORT = process.env.HTTP_PORT || (IS_LIVE ? 80 : 8081);
 
 // Separate logs for local and live SMTP traffic
 const localLogs = [];

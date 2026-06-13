@@ -111,7 +111,7 @@ npm run mail:start
 
 ## Phase 6: Production Setup (Running on Standard Ports 80 & 25)
 
-To make it fully ready to receive emails from public senders like Gmail, Outlook, or Yahoo, you must run the server on standard ports (Web: 80, SMTP: 25). Since the code automatically defaults to these ports in production (when `DEBUG` is not set to `true`), you can run it simply with:
+To make it fully ready to receive emails from public senders like Gmail, Outlook, or Yahoo, you must run the server on standard ports (Web: 80, SMTP: 25). Since the code automatically defaults to these ports in production (when `live` is not set to `false`), you can run it simply with:
 
 ```bash
 # 1. Stop the current node process by pressing Ctrl + C in the terminal
