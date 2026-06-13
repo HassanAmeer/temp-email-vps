@@ -23,11 +23,12 @@ ssh root@64.227.137.95
 ```
 * **Host IP**: `64.227.137.95`
 * **Username**: `root`
-* **Password**: `[Put your VPS root password here]`
+* **Password**: HasanAmeer386@gmail.com 
+--> `[Put your VPS root password here]`
 * **Fingerprint Warning**: The first time you connect, type `yes` to add the VPS IP to your machine's known hosts.
 * **Password**: Enter the root password you created during the Droplet setup.
 
----
+--- 
 
 ## Phase 2: Installing Node.js (v22) and NPM on Ubuntu
 
@@ -110,13 +111,13 @@ npm run mail:start
 
 ## Phase 6: Production Setup (Running on Standard Ports 80 & 25)
 
-To make it fully ready to receive emails from public senders like Gmail, Outlook, or Yahoo, you must run the server on standard ports (Web: 80, SMTP: 25).
+To make it fully ready to receive emails from public senders like Gmail, Outlook, or Yahoo, you must run the server on standard ports (Web: 80, SMTP: 25). Since the code automatically defaults to these ports in production (when `DEBUG` is not set to `true`), you can run it simply with:
 
 ```bash
 # 1. Stop the current node process by pressing Ctrl + C in the terminal
 
-# 2. Run the start command with environment variables to override the default ports
-sudo HTTP_PORT=80 SMTP_PORT=25 npm run mail:start
+# 2. Run the start command as root to bind to ports 80 and 25
+sudo npm run mail:start
 ```
 *Now you can access the dashboard directly without port numbers: `http://64.227.137.95/live`*
 
@@ -130,8 +131,8 @@ If you log out of the SSH terminal, your node script will stop running. To keep 
 # 1. Install PM2 (Process Manager) globally on the system
 npm install -g pm2
 
-# 2. Start the mail receiver script in the background on Ports 80 and 25
-sudo HTTP_PORT=80 SMTP_PORT=25 pm2 start rmail/rmail.js --name "temp-email"
+# 2. Start the mail receiver script in the background as root (which defaults to Ports 80 and 25)
+sudo pm2 start rmail/rmail.js --name "temp-email"
 
 # 3. Save the running process list so it automatically restarts if the VPS rebooted
 pm2 save

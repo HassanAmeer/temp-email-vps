@@ -5,8 +5,26 @@ import path from "path";
 import http from "http";
 import nodemailer from "nodemailer";
 
-const SMTP_PORT = process.env.SMTP_PORT || 2525;
-const HTTP_PORT = process.env.HTTP_PORT || 8081;
+// Load .env file manually if it exists
+const envPath = path.join(process.cwd(), ".env");
+if (fs.existsSync(envPath)) {
+  const envConfig = fs.readFileSync(envPath, "utf-8");
+  envConfig.split("\n").forEach(line => {
+    const trimmedLine = line.trim();
+    if (trimmedLine && !trimmedLine.startsWith("#")) {
+      const parts = trimmedLine.split("=");
+      if (parts.length >= 2) {
+        const key = parts[0].trim();
+        const val = parts.slice(1).join("=").trim().replace(/^['"]|['"]$/g, ""); // Remove quotes
+        process.env[key] = val;
+      }
+    }
+  });
+}
+
+const IS_DEBUG = process.env.DEBUG === "true";
+const SMTP_PORT = process.env.SMTP_PORT || (IS_DEBUG ? 2525 : 25);
+const HTTP_PORT = process.env.HTTP_PORT || (IS_DEBUG ? 8081 : 80);
 
 // Separate logs for local and live SMTP traffic
 const localLogs = [];
@@ -285,7 +303,7 @@ const httpServer = http.createServer((req, res) => {
     const logReceiver = isLive ? addLiveLog : addLocalLog;
 
     logSender(`Triggering ${isLive ? "live" : "local"} Nodemailer test send...`);
-    
+
     const transporter = nodemailer.createTransport({
       host: "127.0.0.1",
       port: SMTP_PORT,
