@@ -1,3 +1,14 @@
+/**
+ * ------------------------------------------------------------------
+ * FILE: send-mail-from-generated-mail-from-local.js
+ * PURPOSE: This script is used by the Local Console (Port 8081) to send outbound emails.
+ * CAPABILITIES:
+ *  - Local to Live: Can send emails from a generated address to public services like Gmail, Yahoo, etc.
+ *  - Local to Local: Can send emails from one generated address to another generated address.
+ * NOTE: When running on a local development machine, this uses the local internet connection which usually does not block Port 25, 
+ * allowing emails to reach Gmail (though they may land in Spam if SPF/DMARC are not fully propagated).
+ * ------------------------------------------------------------------
+ */
 import nodemailer from "nodemailer";
 import dns from "dns";
 import util from "util";

@@ -1,3 +1,13 @@
+/**
+ * ------------------------------------------------------------------
+ * FILE: send-local-cli.js
+ * PURPOSE: A Command Line Interface (CLI) tool for sending emails directly from the terminal.
+ * CAPABILITIES: 
+ *  - Local to Live: Send emails to any valid external email address (Gmail, Yahoo, etc.).
+ *  - Local to Local: Send emails to any generated custom domain email address.
+ * HOW IT WORKS: Prompts the user for From, To, Subject, and Message, and then uses the local sending script (`send-mail-from-generated-mail-from-local.js`) to dispatch the email.
+ * ------------------------------------------------------------------
+ */
 import readline from "readline";
 import { sendOutboundEmail } from "./smail/send-mail-from-generated-mail-from-local.js";
 

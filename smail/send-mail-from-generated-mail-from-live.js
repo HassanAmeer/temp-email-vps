@@ -1,3 +1,13 @@
+/**
+ * ------------------------------------------------------------------
+ * FILE: send-mail-from-generated-mail-from-live.js
+ * PURPOSE: This script is used by the Live Console (Port 80) to send outbound emails.
+ * CAPABILITIES:
+ *  - Live to Live: Can send emails from a generated address (e.g. abc@llamerada.online) to public services like Gmail, Yahoo, etc.
+ *  - Live to Local: Can send emails from a generated address to another generated address on the same server.
+ * NOTE: Since this runs on the VPS, it requires outbound Port 25 to be unblocked by DigitalOcean to send to public domains like Gmail.
+ * ------------------------------------------------------------------
+ */
 import nodemailer from "nodemailer";
 import dns from "dns";
 import util from "util";
