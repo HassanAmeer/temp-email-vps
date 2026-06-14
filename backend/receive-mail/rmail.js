@@ -74,9 +74,9 @@ function addLiveSendingLog(message) {
 }
 
 // Folders for local and live emails
-const localMailDir = path.join(process.cwd(), "backend", "receive-mail", "mails-data", "local");
-const liveMailDir = path.join(process.cwd(), "backend", "receive-mail", "mails-data", "live");
-const attachmentsDir = path.join(process.cwd(), "backend", "receive-mail", "mails-data", "attachments");
+const localMailDir = path.join(process.cwd(), "backend", "storage", "local");
+const liveMailDir = path.join(process.cwd(), "backend", "storage", "live");
+const attachmentsDir = path.join(process.cwd(), "backend", "storage", "media");
 [localMailDir, liveMailDir, attachmentsDir].forEach(dir => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
@@ -176,13 +176,13 @@ const smtpServer = new SMTPServer({
       );
 
       if (isLocal) {
-        addLocalLog(`💾 Email saved to: receive-mail/mails-data/local/${fileName}`);
+        addLocalLog(`💾 Email saved to: backend/storage/local/${fileName}`);
         addLocalLog(`✅ Email Transaction Complete! Subject: "${subject}"`);
         addLocalLog("__________________________________________________");
       } else {
-        addLiveLog(`💾 Email saved to: receive-mail/mails-data/live/${fileName}`);
+        addLiveLog(`💾 Email saved to: backend/storage/live/${fileName}`);
         addLiveLog(`✅ Email Transaction Complete! Subject: "${subject}"`);
-        addLiveLog("__________________________________________________");
+        addLocalLog("__________________________________________________");
       }
 
       return callback();
