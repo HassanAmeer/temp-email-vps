@@ -29,6 +29,8 @@ Is project ke har hisse ko tafseel se samajhne ke liye alag alag guides banayi g
    - Email receive karne ka flow, DNS (A aur MX) records, aur zaroori packages ki tafseel.
 5. 🌐 **[Protocols & DNS Records Guide](./doc-flow/protocols.md)**
    - Tamam zaroori protocols (A, MX, TXT, SPF, DMARC, DKIM, SMTP) ki mukammal tafseel aur unhe implement karne ka tariqa.
+6. 🔌 **[Outbound SMTP Server Guide (on-smtp)](./doc-flow/on-smtp-flow.md)**
+   - Kisi bhi naye project (e.g., PHP, Node.js) mein is mail server ko attach karne ka tariqa, credentials, aur Port 2525 connection flow.
 
 ---
 
