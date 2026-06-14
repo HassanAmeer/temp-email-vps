@@ -18,7 +18,7 @@ const resolveMx = util.promisify(dns.resolveMx);
  * Sends an email directly to the recipient's MX server.
  * @param {Object} options - { from, to, subject, text, html }
  */
-export async function sendOutboundEmail({ from, to, subject, text, html, logCallback }) {
+export async function sendOutboundEmail({ from, to, subject, text, html, attachments, logCallback }) {
   const log = (msg) => {
     console.log(msg);
     if (logCallback) logCallback(msg);
@@ -79,7 +79,11 @@ export async function sendOutboundEmail({ from, to, subject, text, html, logCall
     to,
     subject: subject || "(No Subject)",
     text: text || "",
-    html: html || ""
+    html: html || "",
+    attachments: attachments ? attachments.map(att => ({
+      filename: att.filename,
+      content: Buffer.from(att.content, 'base64')
+    })) : []
   };
 
   try {

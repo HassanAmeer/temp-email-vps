@@ -75,10 +75,11 @@ function addLiveSendingLog(message) {
 
 // Folders for local and live emails
 const localMailDir = path.join(process.cwd(), "rmail", "mails-data", "local");
-const liveMailDir = path.join(process.cwd(), "rmail", "mails-data", "live");
-
-if (!fs.existsSync(localMailDir)) fs.mkdirSync(localMailDir, { recursive: true });
-if (!fs.existsSync(liveMailDir)) fs.mkdirSync(liveMailDir, { recursive: true });
+const liveMailDir = path.join(process.cwd(), "rmail/mails-data/live");
+const attachmentsDir = path.join(process.cwd(), "rmail/mails-data/attachments");
+[localMailDir, liveMailDir, attachmentsDir].forEach(dir => {
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+});
 
 // ==========================================
 // 1. SMTP Server Setup
@@ -147,11 +148,24 @@ const smtpServer = new SMTPServer({
         date: parsed.date || new Date(),
         senderIp: session.remoteAddress,
         headers: Object.fromEntries(parsed.headers),
-        attachments: parsed.attachments?.map(att => ({
-          filename: att.filename,
-          contentType: att.contentType,
-          size: att.size
-        })) || []
+        attachments: parsed.attachments?.map(att => {
+          // Generate a safe filename
+          const safeFilename = (att.filename || "unnamed").replace(/[^a-zA-Z0-9.-]/g, "_");
+          const savedFileName = `${Date.now()}-${safeFilename}`;
+          const filePath = path.join(attachmentsDir, savedFileName);
+          
+          // Save the attachment buffer to disk
+          if (att.content) {
+            fs.writeFileSync(filePath, att.content);
+          }
+
+          return {
+            filename: att.filename || "unnamed",
+            contentType: att.contentType,
+            size: att.size,
+            url: `/api/attachments/${savedFileName}`
+          };
+        }) || []
       };
 
       const targetDir = isLocal ? localMailDir : liveMailDir;
@@ -342,7 +356,7 @@ const httpServer = http.createServer((req, res) => {
     req.on("end", async () => {
       try {
         const data = JSON.parse(body);
-        const { from, to, subject, text, html } = data;
+        const { from, to, subject, text, html, attachments } = data;
         
         addLiveSendingLog(`Initiating custom outbound email from ${from} to ${to}`);
         
@@ -352,6 +366,7 @@ const httpServer = http.createServer((req, res) => {
           subject, 
           text, 
           html, 
+          attachments,
           logCallback: (msg) => addLiveSendingLog(msg) 
         });
         
@@ -374,7 +389,7 @@ const httpServer = http.createServer((req, res) => {
     req.on("end", async () => {
       try {
         const data = JSON.parse(body);
-        const { from, to, subject, text, html } = data;
+        const { from, to, subject, text, html, attachments } = data;
         
         addLocalSendingLog(`Initiating custom outbound email from ${from} to ${to}`);
         
@@ -384,6 +399,7 @@ const httpServer = http.createServer((req, res) => {
           subject, 
           text, 
           html, 
+          attachments,
           logCallback: (msg) => addLocalSendingLog(msg) 
         });
         
@@ -396,6 +412,25 @@ const httpServer = http.createServer((req, res) => {
         res.end(JSON.stringify({ success: false, error: error.message }));
       }
     });
+    return;
+  }
+
+  // API 9: Serve Attachment Files
+  if (req.url.startsWith("/api/attachments/") && req.method === "GET") {
+    const filename = req.url.split("/api/attachments/")[1];
+    if (!filename) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({ error: "Missing filename" }));
+    }
+    const filePath = path.join(attachmentsDir, decodeURIComponent(filename));
+    if (!fs.existsSync(filePath)) {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      return res.end(JSON.stringify({ error: "Attachment not found" }));
+    }
+    
+    // Serve the file
+    res.writeHead(200);
+    fs.createReadStream(filePath).pipe(res);
     return;
   }
 
