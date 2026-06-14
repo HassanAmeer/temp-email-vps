@@ -62,6 +62,9 @@ Neechay har Protocol aur Record ki tafseel, wajah, aur pros/cons diye gaye hain.
   > **🚨 Nayi Policy (2024 Updates):** Google aur Yahoo ne apne rules bohot strict kar diye hain. Ab agar aapki domain par sirf SPF laga ho, tab bhi email Spam mein ja sakti hai ya reject ho sakti hai. Inki nayi policies ke mutabiq, 100% Inbox delivery ke liye ab **DKIM lazmi (mandatory)** ho gaya hai.
 * **Kaise Generate / Implement Karein?** Iske liye VPS par `crypto` (ya openssl) se keys generate karni parti hain. (Humne iske liye `generate-dkim.js` banaya hai).
   * Keys generate karne ke liye terminal mein yeh command chalayen: `node scripts/generate-dkim.js`
+  ```js
+    node scripts/generate-dkim.js
+  ```
   * Generate hone ke baad, Public key ko DNS mein Type `TXT`, Name `default._domainkey` aur Value `v=DKIM1; k=rsa; p=<public-key>` rakh kar save kiya jata hai.
 * **Pros:** Sab se strong email security. Sender reputation bohot achi ho jati hai.
 * **Cons:** Implement karna thora mushkil hai. Agar private key leak ho jaye toh koi bhi aapki signature use kar sakta hai. Isay periodic (salana) change karna parta hai.
