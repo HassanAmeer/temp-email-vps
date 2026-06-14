@@ -6,15 +6,15 @@
     "bun": ">=1.0.0"
   },
   "scripts": {
-    "dev": "cd frontend && bun --bun astro dev",
-    "build": "cd frontend && bun --bun astro build",
-    "preview": "cd frontend && bun --bun astro preview",
+    "dev": "cd frontend && bunx astro dev",
+    "build": "cd frontend && bunx astro build",
+    "preview": "cd frontend && bunx astro preview",
     "start": "bunx serve frontend/dist -l 8080",
     "mail:start": "bun backend/receive-mail/receive-mail.js",
     "mail:test": "bun backend/send-mail-simple/send-mail-local-to-local.js",
     "mail:send-ip-mail": "bun backend/send-mail-simple/send-mail-from-local-to-live-by-ip.js",
     "mail:generate-dkim": "bun backend/scripts/generate-dkim.js",
-    "astro": "cd frontend && bun --bun astro"
+    "astro": "cd frontend && bunx astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",
