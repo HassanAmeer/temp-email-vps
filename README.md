@@ -31,6 +31,8 @@ Is project ke har hisse ko tafseel se samajhne ke liye alag alag guides banayi g
    - Tamam zaroori protocols (A, MX, TXT, SPF, DMARC, DKIM, SMTP) ki mukammal tafseel aur unhe implement karne ka tariqa.
 6. 🔌 **[Outbound SMTP Server Guide (on-smtp)](./doc-flow/on-smtp-flow.md)**
    - Kisi bhi naye project (e.g., PHP, Node.js) mein is mail server ko attach karne ka tariqa, credentials, aur Port 2525 connection flow.
+7. 🚪 **[Ports Guide](./doc-flow/ports.md)**
+   - Kaunsi port (25, 2525, 80, 8081) kis maqsad ke liye (Live VPS, Local Machine, Client App) istemal hoti hai, uski mukammal tafseel.
 
 ---
 

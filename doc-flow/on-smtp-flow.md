@@ -72,3 +72,7 @@ Agar aap DigitalOcean par Port 25 unblock nahi karwa pa rahe, toh aap in VPS pro
 1. **Contabo:** Sasta aur behtareen hai, by default Port 25 block nahi hota (ya asani se support par ticket khol kar unblock ho jata hai).
 2. **Hostinger VPS:** Inki policy bhi email servers ke hawale se behtar hai.
 3. **Linode / Vultr:** Inmein bhi ticket open karke Port 25 asani se unblock karwaya ja sakta hai.
+
+### 🎯 Port 25 vs Port 2525
+* **Port 25 (Server-to-Server):** Isay sirf Server se Server (MTA to MTA) baat karne ke liye rakha gaya hai (jaise Gmail hamare VPS ko email bhejta hai). Ismein Authentication nahi lagti.
+* **Port 587 ya 2525 (Client-to-Server):** Isay Message Submission Port kaha jata hai. Yeh sirf is kaam ke liye banaya gaya hai ke ek insaan ya app (client) apne server ko authentication (username/password) de kar email pakra (hand-over kar) sake.
