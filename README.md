@@ -1,46 +1,83 @@
-# TempEmail Static Landing Page & Hidden Consoles
+# Temp Email System (Custom Email Server)
 
-This project is a secure temporary email dashboard utility built with Astro.js (Tailwind CSS v4 + custom SVG vector icons) and a backend Node.js SMTP server. 
+Yeh ek custom email server application hai jo aapko apni custom domain (jaise `llamerada.online`) par emails bhejney aur wasool (receive) karne ki poori saholat deti hai. Yeh system **Local development** aur **Live VPS** dono environments mein theek tarah se kaam karne ke liye design kiya gaya hai.
 
----
+## 🚀 Features (Khusoosiyat)
 
-## 🔒 Hidden Routes / Backdoor Testing
-
-The default landing page (`/`) is designed as a simple static online check page. It contains **no buttons, links, or navigation options** to the dashboards, making it safe to show to clients.
-
-To access the consoles, you must type the URLs manually:
-* **Local Test Console:** `http://localhost:8081/local`
-* **Live VPS Console:** `http://localhost:8081/live`
-
----
-
-## 🚀 Running Locally
-
-To test everything on your local computer:
-
-1. **Build the assets**:
-   ```bash
-   npm run build
-   ```
-
-2. **Start the SMTP and HTTP Server**:
-   ```bash
-   npm run mail:start
-   ```
-   * SMTP Server listens on: `2525`
-   * HTTP Web Server listens on: `8081`
-
-3. **Access via browser**:
-   * Open `http://localhost:8081/local` in your browser.
-   * Click the **Send Test Email (Nodemailer)** button at the bottom of the local page to test immediately.
+- **Send Emails:** Aap kisi bhi public email address (Gmail, Yahoo) ya custom domain par email bhej sakte hain.
+- **Receive Emails:** Apni custom domain par aane wali tamam emails ko live receive aur read kar sakte hain.
+- **4-Way Email Flow:**
+  - `Local to Local`
+  - `Local to Live`
+  - `Live to Local`
+  - `Live to Live`
+- **Direct IP Sending/Receiving:** Baghair domain ke direct IP address (e.g. `user@[64.227.137.95]`) use kar ke bhi email send ya receive ki ja sakti hai.
+- **Spam Prevention:** SPF aur DMARC records ke zariye emails ko spam mein jane se bachane ka mukammal intezam.
 
 ---
 
-## 📂 Project Structure
+## 📚 Documentation & Guides
+Is project ke har hisse ko tafseel se samajhne ke liye alag alag guides banayi gayi hain taake naye developers ko asani ho. Aap neechay diye gaye links par click kar ke unhe parh sakte hain:
 
-* **`src/pages/index.astro`**: Clean static landing page (no links to consoles).
-* **`src/pages/local.astro`**: Local SMTP dashboard page.
-* **`src/pages/live.astro`**: Live SMTP dashboard page.
-* **`rmail/rmail.js`**: Backend SMTP receiver (Port 2525) & HTTP API (Port 8081) server.
-* **`rmail/mails-data/local/`**: Local test emails saved here.
-* **`rmail/mails-data/live/`**: Live SMTP emails from public networks saved here.
+1. 📖 **[VPS Setup Guide](./vps-setup.md)**
+   - Naye VPS par Node.js, PM2 install karne aur is project ko live karne ka poora tariqa.
+2. 🛡️ **[Spam Prevention Guide](./spam-prevention-guide.md)**
+   - Emails ko reject ya spam hone se bachane ke liye SPF aur DMARC records lagane ka tariqa.
+3. 📤 **[Send Email Flow](./send-mail-flow.md)**
+   - Email bhejne ka mukammal flow, zaroori packages, port requirements, aur mukhtalif scenarios.
+4. 📥 **[Receive Email Flow](./receive-mail-flow.md)**
+   - Email receive karne ka flow, DNS (A aur MX) records, aur zaroori packages ki tafseel.
+
+---
+
+## 📊 Flow Diagrams (System Kaise Kaam Karta Hai)
+
+Neechay diye gaye diagrams mein Email Send aur Receive karne ke tamam flows wazeh kiye gaye hain.
+
+### 📤 1. Email Sending Flow Diagram
+```mermaid
+graph TD
+    subgraph "Email Send Flow"
+        LocalApp("Local Machine (CLI / Local UI)")
+        LiveApp("Live VPS (Live UI)")
+        
+        LocalApp -- "1. Local to Local" --> LocalMailServer("Local SMTP Server")
+        LocalApp -- "2. Local to Live" --> ExternalServer("Gmail / Yahoo Server")
+        
+        LiveApp -- "3. Live to Local (Custom Domain)" --> VPSMailServer("VPS SMTP Server")
+        LiveApp -- "4. Live to Live" --> ExternalServer
+    end
+```
+
+### 📥 2. Email Receiving Flow Diagram
+```mermaid
+graph TD
+    subgraph "Email Receive Flow"
+        LocalScript("Local Machine Script")
+        VPSScript("VPS Live Script")
+        ExternalUser("External User (Gmail/Yahoo)")
+        
+        LocalScript -- "1. Local to Local" --> LocalSMTPServer("Local Custom Server")
+        VPSScript -- "2. Live to Local" --> LocalSMTPServer
+        
+        LocalScript -- "3. Local to Live" --> VPSSMTPServer("Live VPS Custom Server")
+        ExternalUser -- "4. Live to Live" --> VPSSMTPServer
+    end
+```
+
+---
+
+## 🛠️ Quick Start (Run Kaise Karein?)
+
+Agar aap is project ko apne paas run karna chahte hain toh yeh commands chalayen:
+
+```bash
+# 1. Packages install karein
+npm install
+
+# 2. Frontend Astro app ko build karein
+npm run build
+
+# 3. Email Server aur Backend API start karein
+npm run mail:start
+```
