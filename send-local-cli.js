@@ -23,8 +23,19 @@ async function main() {
   console.log("🚀 Send Email From Local CLI 🚀");
   console.log("==========================================\n");
 
-  const from = await askQuestion("1. Enter 'From' Email Address (e.g., yaar@llamerada.online): ");
-  const to = await askQuestion("2. Enter 'To' Email Address (e.g., friend@gmail.com): ");
+  let from = await askQuestion("1. Enter 'From' Email Address (Leave empty for yaar@llamerada.online): ");
+  if (!from.trim()) {
+    from = "yaar@llamerada.online";
+  }
+
+  let to = "";
+  while (!to.trim()) {
+    to = await askQuestion("2. Enter 'To' Email Address (Required): ");
+    if (!to.trim()) {
+      console.log("   ❌ 'To' address is mandatory. Please enter an email address.");
+    }
+  }
+
   const subject = await askQuestion("3. Enter Subject: ");
   const text = await askQuestion("4. Enter Message: ");
   
