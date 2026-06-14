@@ -5,7 +5,7 @@ import path from 'path';
 import { sendOutboundEmail } from '../smail/send-mail-from-generated-mail-from-live.js';
 
 const PORT = 2525; // Port for outbound SMTP Relay (Client to VPS)
-const credsPath = path.join(process.cwd(), 'on-smtp', 'credentials.json');
+const credsPath = path.join(process.cwd(), 'backend', 'on-smtp', 'credentials.json');
 
 // Load .env file manually if it exists
 const envPath = path.join(process.cwd(), ".env");

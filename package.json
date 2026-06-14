@@ -6,14 +6,14 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "start": "serve dist -l 8080",
-    "mail:start": "node rmail/rmail.js",
-    "mail:test": "node smail/send-mail-local-to-local.js",
-    "mail:send-ip-mail": "node smail/send-mail-from-local-to-live-by-ip.js",
-    "astro": "astro"
+    "dev": "cd frontend && astro dev",
+    "build": "cd frontend && astro build",
+    "preview": "cd frontend && astro preview",
+    "start": "serve frontend/dist -l 8080",
+    "mail:start": "node backend/rmail/rmail.js",
+    "mail:test": "node backend/smail/send-mail-local-to-local.js",
+    "mail:send-ip-mail": "node backend/smail/send-mail-from-local-to-live-by-ip.js",
+    "astro": "cd frontend && astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",

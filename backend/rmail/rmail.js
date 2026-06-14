@@ -74,9 +74,9 @@ function addLiveSendingLog(message) {
 }
 
 // Folders for local and live emails
-const localMailDir = path.join(process.cwd(), "rmail", "mails-data", "local");
-const liveMailDir = path.join(process.cwd(), "rmail/mails-data/live");
-const attachmentsDir = path.join(process.cwd(), "rmail/mails-data/attachments");
+const localMailDir = path.join(process.cwd(), "backend", "rmail", "mails-data", "local");
+const liveMailDir = path.join(process.cwd(), "backend", "rmail", "mails-data", "live");
+const attachmentsDir = path.join(process.cwd(), "backend", "rmail", "mails-data", "attachments");
 [localMailDir, liveMailDir, attachmentsDir].forEach(dir => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
@@ -481,7 +481,7 @@ const httpServer = http.createServer((req, res) => {
     reqPath = "/live/index.html";
   }
 
-  const publicPath = path.join(process.cwd(), "dist", reqPath);
+  const publicPath = path.join(process.cwd(), "frontend", "dist", reqPath);
 
   if (fs.existsSync(publicPath) && fs.lstatSync(publicPath).isFile()) {
     const ext = path.extname(publicPath);
@@ -499,7 +499,7 @@ const httpServer = http.createServer((req, res) => {
     fs.createReadStream(publicPath).pipe(res);
   } else {
     // SPA fallback
-    const indexFallback = path.join(process.cwd(), "dist", "index.html");
+    const indexFallback = path.join(process.cwd(), "frontend", "dist", "index.html");
     if (fs.existsSync(indexFallback)) {
       res.writeHead(200, { "Content-Type": "text/html" });
       fs.createReadStream(indexFallback).pipe(res);

@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 
-const dkimDir = path.join(process.cwd(), 'rmail', 'dkim');
+const dkimDir = path.join(process.cwd(), 'backend', 'rmail', 'dkim');
 
 if (!fs.existsSync(dkimDir)) {
   fs.mkdirSync(dkimDir, { recursive: true });
