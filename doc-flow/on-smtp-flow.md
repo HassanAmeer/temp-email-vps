@@ -66,3 +66,9 @@ Jaise ke humein pata hai ke dunya ka har mail server (Gmail/Yahoo) aane wali ema
 * Jab aapki app hamare VPS ko email degi (Safar 1), toh **Port 2525** use hoga jo ke hamesha khula hota hai (No issues).
 * Lakin jab hamara VPS usay Gmail tak deliver karega (Safar 2), toh hamare VPS ko aagay **Port 25** use karna hoga. Agar DigitalOcean ne Port 25 outbound block kiya hua hai, toh email Safar 2 mein fail ho jayegi.
 * Iska ek hi hal hai ke DigitalOcean support se baat kar ke Port 25 unblock karwaya jaye. Jab tak unblock nahi hota, Local-to-Local emails bheji ja sakti hain.
+
+### 💡 Alternative VPS Providers (Jo Port 25 allow karte hain)
+Agar aap DigitalOcean par Port 25 unblock nahi karwa pa rahe, toh aap in VPS providers ka istemal kar sakte hain jo aam taur par Port 25 khula rakhte hain:
+1. **Contabo:** Sasta aur behtareen hai, by default Port 25 block nahi hota (ya asani se support par ticket khol kar unblock ho jata hai).
+2. **Hostinger VPS:** Inki policy bhi email servers ke hawale se behtar hai.
+3. **Linode / Vultr:** Inmein bhi ticket open karke Port 25 asani se unblock karwaya ja sakta hai.
