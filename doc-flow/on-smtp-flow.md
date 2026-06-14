@@ -7,9 +7,36 @@ Pehle hum emails bhejne ke liye apne custom UI (Live Console) ka istemal kar rah
 
 Is maqsad ke liye humne `on-smtp/smtp-server.js` banaya hai jo **Port 2525** par chalta hai aur Username/Password ke zariye authenticate karta hai. Yeh bilkul **SendGrid** ya **Amazon SES** ki tarah kaam karta hai.
 
+## 📂 Folder Structure (is folder mein kya hai?)
+1. **`smtp-server.js`**: Yeh hamara mukhya (main) server hai jo Port 2525 par chalta hai aur emails receive karke authenticate karta hai.
+2. **`credentials.json`**: Isme username aur passwords mehfooz hote hain jo hum external apps ko dete hain taake wo is server se connect ho sakein.
+
 ---
 
 ## 🔄 Flow (Yeh kaam kaise karta hai?)
+
+Neechay diye gaye flowchart se aap iska poora safar samajh sakte hain:
+
+```mermaid
+sequenceDiagram
+    participant App as External App (Laravel/Node)
+    participant VPS as Our VPS (on-smtp server)
+    participant Dest as Gmail / Yahoo
+
+    Note over App,VPS: Safar 1 (Port 2525)
+    App->>VPS: Connect via Port 2525
+    VPS-->>App: Ask for Username/Password
+    App->>VPS: Send Credentials (credentials.json)
+    VPS-->>App: Authentication Successful!
+    App->>VPS: Submit Email Data (To, From, Body)
+    
+    Note over VPS: VPS signs email with DKIM
+    
+    Note over VPS,Dest: Safar 2 (Port 25)
+    VPS->>Dest: Connect via Port 25 (Outbound)
+    Dest-->>VPS: Receive & Verify DKIM
+    VPS->>Dest: Deliver Email
+```
 
 Email bhejte waqt do (2) safar (legs) hote hain:
 

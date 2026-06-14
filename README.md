@@ -16,6 +16,20 @@ Yeh ek custom email server application hai jo aapko apni custom domain (jaise `l
 
 ---
 
+## 🏗️ Architecture Flow (Kaam Kaise Karta Hai?)
+
+```mermaid
+graph LR
+    A[Laravel/Node App] -- "Port 2525 (Auth)" --> B(Our VPS Server)
+    B -- "Adds DKIM Signature" --> B
+    B -- "Port 25 (Outbound)" --> C[Gmail / Yahoo Inbox]
+    
+    D[Gmail / Yahoo] -- "Port 25 (Inbound)" --> B
+    B -- "Parses & Saves" --> E[(Local JSON Storage)]
+```
+
+---
+
 ## 📊 Current Port Usage (Kaunsi Port Kahan Use Hoti Hai?)
 
 ### 🔴 Live Environment (`live=true`)

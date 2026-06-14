@@ -542,12 +542,20 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 // Start Servers
-smtpServer.listen(SMTP_PORT, "0.0.0.0", () => {
-  addLocalLog(`SMTP Server initialized on Port ${SMTP_PORT}`);
-  addLiveLog(`SMTP Server initialized on Port ${SMTP_PORT}`);
+smtpServer.listen(SMTP_PORT, () => {
+  const envText = IS_LIVE ? "LIVE Environment" : "LOCAL Environment";
+  addLocalLog(`SMTP Server listening on Port ${SMTP_PORT} for incoming emails (${envText}).`);
+  addLiveLog(`SMTP Server listening on Port ${SMTP_PORT} for incoming emails (${envText}).`);
+  console.log(`==========================================`);
+  console.log(`🚀 [RECEIVING SERVER] Currently used port for Receiving: ${SMTP_PORT} (${envText})`);
+  console.log(`==========================================`);
 });
 
-httpServer.listen(HTTP_PORT, "0.0.0.0", () => {
-  addLocalLog(`HTTP Web API initialized on Port ${HTTP_PORT}`);
-  addLiveLog(`HTTP Web API initialized on Port ${HTTP_PORT}`);
+app.listen(HTTP_PORT, () => {
+  const envText = IS_LIVE ? "LIVE Environment" : "LOCAL Environment";
+  addLocalLog(`Web Console listening on http://localhost:${HTTP_PORT} (${envText})`);
+  addLiveLog(`Web Console listening on http://localhost:${HTTP_PORT} (${envText})`);
+  console.log(`==========================================`);
+  console.log(`🌐 [WEB UI] Currently used port for Web Dashboard: ${HTTP_PORT} (${envText})`);
+  console.log(`==========================================`);
 });

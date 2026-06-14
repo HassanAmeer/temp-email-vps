@@ -7,6 +7,23 @@ import { sendOutboundEmail } from '../smail/send-mail-from-generated-mail-from-l
 const PORT = 2525; // Port for outbound SMTP Relay (Client to VPS)
 const credsPath = path.join(process.cwd(), 'on-smtp', 'credentials.json');
 
+// Load .env file manually if it exists
+const envPath = path.join(process.cwd(), ".env");
+if (fs.existsSync(envPath)) {
+  const envConfig = fs.readFileSync(envPath, "utf-8");
+  envConfig.split("\n").forEach(line => {
+    const trimmedLine = line.trim();
+    if (trimmedLine && !trimmedLine.startsWith("#")) {
+      const parts = trimmedLine.split("=");
+      if (parts.length >= 2) {
+        process.env[parts[0].trim()] = parts.slice(1).join("=").trim().replace(/^['"]|['"]$/g, "");
+      }
+    }
+  });
+}
+const IS_LIVE = process.env.live !== "false";
+const envText = IS_LIVE ? "LIVE Environment" : "LOCAL Environment";
+
 // Helper to check credentials
 function authenticateUser(username, password) {
   try {
@@ -98,6 +115,7 @@ server.on('error', (err) => {
 server.listen(PORT, () => {
   console.log(`==========================================`);
   console.log(`🚀 [ON-SMTP] Outbound Relay Server Running`);
+  console.log(`🌍 Context: ${envText}`);
   console.log(`🔌 Port: ${PORT}`);
   console.log(`🔐 Authentication: Required`);
   console.log(`📄 Credentials: on-smtp/credentials.json`);
