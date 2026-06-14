@@ -695,7 +695,7 @@ import '../styles/global.css';
 					alertBox.classList.add('hidden');
 
 					try {
-						const res = await fetch(`${API_URL}/api/send-email`, {
+						const res = await fetch(`${API_URL}/api/send-email/local`, {
 							method: 'POST',
 							headers: { 'Content-Type': 'application/json' },
 							body: JSON.stringify({

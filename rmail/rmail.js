@@ -4,7 +4,8 @@ import fs from "fs";
 import path from "path";
 import http from "http";
 import nodemailer from "nodemailer";
-import { sendOutboundEmail } from "../smail/send-mail-from-generated-email.js";
+import { sendOutboundEmail as sendOutboundEmailLive } from "../smail/send-mail-from-generated-mail-live.js";
+import { sendOutboundEmail as sendOutboundEmailLocal } from "../smail/send-mail-from-generated-mail-local.js";
 
 // Load .env file manually if it exists
 const envPath = path.join(process.cwd(), ".env");
@@ -334,8 +335,8 @@ const httpServer = http.createServer((req, res) => {
     return;
   }
 
-  // API 8: Send Custom Outbound Email
-  if (req.url === "/api/send-email" && req.method === "POST") {
+  // API 8: Send Custom Outbound Email (Live)
+  if (req.url === "/api/send-email/live" && req.method === "POST") {
     let body = "";
     req.on("data", chunk => body += chunk.toString());
     req.on("end", async () => {
@@ -345,7 +346,7 @@ const httpServer = http.createServer((req, res) => {
         
         addLiveSendingLog(`Initiating custom outbound email from ${from} to ${to}`);
         
-        await sendOutboundEmail({ 
+        await sendOutboundEmailLive({ 
           from, 
           to, 
           subject, 
@@ -359,6 +360,38 @@ const httpServer = http.createServer((req, res) => {
         res.end(JSON.stringify({ success: true }));
       } catch (error) {
         addLiveSendingLog(`❌ Failed to send custom email: ${error.message}`);
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ success: false, error: error.message }));
+      }
+    });
+    return;
+  }
+
+  // API 9: Send Custom Outbound Email (Local)
+  if (req.url === "/api/send-email/local" && req.method === "POST") {
+    let body = "";
+    req.on("data", chunk => body += chunk.toString());
+    req.on("end", async () => {
+      try {
+        const data = JSON.parse(body);
+        const { from, to, subject, text, html } = data;
+        
+        addLocalSendingLog(`Initiating custom outbound email from ${from} to ${to}`);
+        
+        await sendOutboundEmailLocal({ 
+          from, 
+          to, 
+          subject, 
+          text, 
+          html, 
+          logCallback: (msg) => addLocalSendingLog(msg) 
+        });
+        
+        addLocalSendingLog(`✅ Successfully sent custom email from ${from} to ${to}`);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ success: true }));
+      } catch (error) {
+        addLocalSendingLog(`❌ Failed to send custom email: ${error.message}`);
         res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ success: false, error: error.message }));
       }
