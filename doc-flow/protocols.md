@@ -62,3 +62,6 @@ Neechay har Protocol aur Record ki tafseel, wajah, aur pros/cons diye gaye hain.
 * **Kaise Generate / Implement Karein?** Iske liye VPS par `crypto` (ya openssl) se keys generate karni parti hain. (Humne iske liye `generate-dkim.js` banaya hai). Public key ko DNS mein Type `TXT`, Name `default._domainkey` aur Value `v=DKIM1; k=rsa; p=<public-key>` rakh kar save kiya jata hai.
 * **Pros:** Sab se strong email security. Sender reputation bohot achi ho jati hai.
 * **Cons:** Implement karna thora mushkil hai. Agar private key leak ho jaye toh koi bhi aapki signature use kar sakta hai. Isay periodic (salana) change karna parta hai.
+
+> **💡 Important Note For Multiple Domains:**
+> Aapko har nayi domain ke liye nayi DKIM key generate karne ki zaroorat **nahi** hai. VPS ke andar majood ek hi "Private Key" hazaron domains ko sign kar sakti hai. Jab bhi koi nayi domain is server ke sath attach karni ho, toh bas yahi same DKIM TXT (Public Key) record us nayi domain ke DNS mein copy-paste kar dein. Hamara code automatically us domain ko sign kar dega!
