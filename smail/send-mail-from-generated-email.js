@@ -54,12 +54,12 @@ export async function sendOutboundEmail({ from, to, subject, text, html, logCall
     },
     logger: {
       level: 'debug',
-      trace: (msg, meta) => log(`[SMTP TRACE] ${msg} ${JSON.stringify(meta||{})}`),
-      debug: (msg, meta) => log(`[SMTP DEBUG] ${msg} ${JSON.stringify(meta||{})}`),
-      info: (msg, meta) => log(`[SMTP INFO] ${msg} ${JSON.stringify(meta||{})}`),
-      warn: (msg, meta) => log(`[SMTP WARN] ${msg} ${JSON.stringify(meta||{})}`),
-      error: (msg, meta) => log(`[SMTP ERROR] ${msg} ${JSON.stringify(meta||{})}`),
-      fatal: (msg, meta) => log(`[SMTP FATAL] ${msg} ${JSON.stringify(meta||{})}`)
+      trace: (meta, msg, ...args) => log(`[SMTP TRACE] ` + util.format(msg, ...args)),
+      debug: (meta, msg, ...args) => log(`[SMTP DEBUG] ` + util.format(msg, ...args)),
+      info: (meta, msg, ...args) => log(`[SMTP INFO] ` + util.format(msg, ...args)),
+      warn: (meta, msg, ...args) => log(`[SMTP WARN] ` + util.format(msg, ...args)),
+      error: (meta, msg, ...args) => log(`[SMTP ERROR] ` + util.format(msg, ...args)),
+      fatal: (meta, msg, ...args) => log(`[SMTP FATAL] ` + util.format(msg, ...args))
     },
     debug: true
   });
