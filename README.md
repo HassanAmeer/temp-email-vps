@@ -20,7 +20,7 @@ Yeh ek custom email server application hai jo aapko apni custom domain (jaise `l
 
 ```mermaid
 graph LR
-    A[Laravel/Node App<br>Local ya Live] -- "Port 2525 (Auth)" --> B(Our VPS Server<br>on-smtp module)
+    A[Laravel/Node App<br>Local ya Live] -- "Port 2525 (Auth)" --> B(Our VPS Server<br>send-mail-by-smtp module)
     B -- "Adds DKIM Signature" --> B
     B -- "Port 25 (Outbound)" --> C[Gmail / Yahoo Inbox]
     
@@ -38,7 +38,7 @@ graph LR
 | **Web Dashboard (UI)** | `80` (or `8080`) | Live browser interface chalane ke liye. |
 | **Receive Email (Inbound)** | `25` | Gmail/Yahoo se standard emails receive karne ke liye. |
 | **Send Email (Outbound)** | `25` | Hamare code se internet par emails bhejne ke liye. |
-| **External App Relay (Auth)** | `2525` | `on-smtp` server ke zariye 3rd party apps (Node/PHP) ko connect karne ke liye. |
+| **External App Relay (Auth)** | `2525` | `send-mail-by-smtp` server ke zariye 3rd party apps (Node/PHP) ko connect karne ke liye. |
 
 ### 🔵 Local Environment (`live=false`)
 | Service | Port | Description |
@@ -46,7 +46,7 @@ graph LR
 | **Web Dashboard (UI)** | `8081` | Local development interface (taake port 80 se conflict na ho). |
 | **Receive Email (Inbound)** | `2525` | Local machines aam taur par port 25 block karti hain, isliye local par 2525 use hoti hai. |
 | **Send Email (Outbound)** | `25` | Local testing ke doran bhi hamara code port 25 par hi send karne ki koshish karta hai. |
-| **External App Relay (Auth)** | `2525` | `on-smtp` server ke zariye external apps connect karne ke liye. |
+| **External App Relay (Auth)** | `2525` | `send-mail-by-smtp` server ke zariye external apps connect karne ke liye. |
 
 ---
 
@@ -63,7 +63,7 @@ Is project ke har hisse ko tafseel se samajhne ke liye alag alag guides banayi g
    - Email receive karne ka flow, DNS (A aur MX) records, aur zaroori packages ki tafseel.
 5. 🌐 **[Protocols & DNS Records Guide](./doc-flow/protocols.md)**
    - Tamam zaroori protocols (A, MX, TXT, SPF, DMARC, DKIM, SMTP) ki mukammal tafseel aur unhe implement karne ka tariqa.
-6. 🔌 **[Outbound SMTP Server Guide (on-smtp)](./doc-flow/on-smtp-flow.md)**
+6. 🔌 **[Outbound SMTP Server Guide (send-mail-by-smtp)](./doc-flow/send-mail-by-smtp-flow.md)**
    - Kisi bhi naye project (e.g., PHP, Node.js) mein is mail server ko attach karne ka tariqa, credentials, aur Port 2525 connection flow.
 7. 🚪 **[Ports Guide](./doc-flow/ports.md)**
    - Kaunsi port (25, 2525, 80, 8081) kis maqsad ke liye (Live VPS, Local Machine, Client App) istemal hoti hai, uski mukammal tafseel.

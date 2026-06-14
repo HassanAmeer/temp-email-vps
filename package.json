@@ -10,9 +10,9 @@
     "build": "cd frontend && astro build",
     "preview": "cd frontend && astro preview",
     "start": "serve frontend/dist -l 8080",
-    "mail:start": "node backend/rmail/rmail.js",
-    "mail:test": "node backend/smail/send-mail-local-to-local.js",
-    "mail:send-ip-mail": "node backend/smail/send-mail-from-local-to-live-by-ip.js",
+    "mail:start": "node backend/receive-mail/rmail.js",
+    "mail:test": "node backend/send-mail/send-mail-local-to-local.js",
+    "mail:send-ip-mail": "node backend/send-mail/send-mail-from-local-to-live-by-ip.js",
     "astro": "cd frontend && astro"
   },
   "dependencies": {

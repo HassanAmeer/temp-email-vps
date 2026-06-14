@@ -15,7 +15,7 @@ Email server aur web applications ko sahi tarah se chalane ke liye mukhtalif **P
 ### 2. Port 587 / 2525 (Client-to-Server / Message Submission)
 * **Kahan use hoti hai?** Local Machine, Client App, ya 3rd Party Projects (e.g., Laravel, Node.js) se VPS tak connect karne ke liye.
 * **Maqsad:** Agar aapne apni kisi external app se email bhejni ho, toh aap apne server se Port 587 ya 2525 par connect karte hain. Yeh port emails ko *submit* (hand-over) karne ke liye banayi gayi hai.
-* **Authentication:** Is port par hamesha **Username aur Password** manga jata hai. (Jaise hamara `on-smtp` server).
+* **Authentication:** Is port par hamesha **Username aur Password** manga jata hai. (Jaise hamara `send-mail-by-smtp` server).
 * **Fayeda (Benefit):** Is port ko local internet providers block nahi karte, isliye local machine se asani se email bheji ja sakti hai.
 
 ---

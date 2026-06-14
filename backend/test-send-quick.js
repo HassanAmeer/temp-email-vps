@@ -1,4 +1,4 @@
-import { sendOutboundEmail } from "./smail/send-mail-from-generated-mail-from-local.js";
+import { sendOutboundEmail } from "./send-mail/send-mail-from-generated-mail-from-local.js";
 
 async function run() {
   try {

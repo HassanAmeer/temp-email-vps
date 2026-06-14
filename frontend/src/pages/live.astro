@@ -217,7 +217,7 @@ import '../styles/global.css';
 
 			<!-- Footer -->
 			<footer class="flex flex-col items-center gap-4 pt-6 border-t border-white/[0.06] mt-auto">
-				<p class="text-xs text-gray-500 font-mono">Live Console Port: 25. Emails: rmail/mails-data/live/</p>
+				<p class="text-xs text-gray-500 font-mono">Live Console Port: 25. Emails: receive-mail/mails-data/live/</p>
 			</footer>
 		</main>
 
@@ -300,7 +300,7 @@ import '../styles/global.css';
 									<span class="bg-emerald-500/10 text-emerald-400 font-mono font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center border border-emerald-500/20 flex-shrink-0">5</span>
 									<div>
 										<h4 class="text-white font-semibold text-sm">JSON File Persistence</h4>
-										<p class="text-gray-400 text-xs mt-1">The parsed data is structured into a standard JSON format and written directly to a `.json` database file inside the <code class="text-gray-300 font-mono">rmail/mails-data/live/</code> folder.</p>
+										<p class="text-gray-400 text-xs mt-1">The parsed data is structured into a standard JSON format and written directly to a `.json` database file inside the <code class="text-gray-300 font-mono">receive-mail/mails-data/live/</code> folder.</p>
 									</div>
 								</div>
 
@@ -330,7 +330,7 @@ import '../styles/global.css';
 									</p>
 									<p>🌐 <strong class="text-gray-300">Why HTTP Protocol & Port 8081?</strong> The frontend dashboard fetches email JSON data via the HTTP protocol. Running HTTP on port <code class="bg-black/30 px-1 py-0.5 rounded text-emerald-400 font-mono">8081</code> separates web API requests from incoming mail traffic, preventing database lockups or latency issues.</p>
 									<p>📂 <strong class="text-gray-300">Where are these configured in the code?</strong>
-										<br>• The ports are defined in <a href="file:///Users/mac/Documents/react/temp-email/rmail/rmail.js#L8-L9" class="text-emerald-400 hover:underline">rmail/rmail.js (lines 8-9)</a>.
+										<br>• The ports are defined in <a href="file:///Users/mac/Documents/react/temp-email/backend/receive-mail/rmail.js#L8-L9" class="text-emerald-400 hover:underline">receive-mail/rmail.js (lines 8-9)</a>.
 										<br>• The API URL is configured in the script tag in <a href="file:///Users/mac/Documents/react/temp-email/src/pages/live.astro#L315-L316" class="text-emerald-400 hover:underline">src/pages/live.astro (lines 315-316)</a>.
 									</p>
 								</div>
@@ -358,7 +358,7 @@ import '../styles/global.css';
 								<li>
 									<strong class="text-white text-sm block mb-1">Setup Persistent Process with PM2</strong>
 									Deploy your code, install dependencies, and run the server in the background using PM2 so it stays active when you log off:
-									<pre class="bg-black/50 p-2.5 rounded font-mono text-[10px] text-emerald-300 mt-1.5 select-all">{"sudo npm install -g pm2\npm2 start rmail/rmail.js --name \"temp-email\"\npm2 save && pm2 startup"}</pre>
+									<pre class="bg-black/50 p-2.5 rounded font-mono text-[10px] text-emerald-300 mt-1.5 select-all">{"sudo npm install -g pm2\npm2 start backend/receive-mail/rmail.js --name \"temp-email\"\npm2 save && pm2 startup"}</pre>
 								</li>
 								<li>
 									<strong class="text-white text-sm block mb-1">Connect Your Domain (DNS Settings)</strong>

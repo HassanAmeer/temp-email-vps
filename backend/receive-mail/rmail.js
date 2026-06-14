@@ -4,8 +4,8 @@ import fs from "fs";
 import path from "path";
 import http from "http";
 import nodemailer from "nodemailer";
-import { sendOutboundEmail as sendOutboundEmailLive } from "../smail/send-mail-from-generated-mail-from-live.js";
-import { sendOutboundEmail as sendOutboundEmailLocal } from "../smail/send-mail-from-generated-mail-from-local.js";
+import { sendOutboundEmail as sendOutboundEmailLive } from "../send-mail/send-mail-from-generated-mail-from-live.js";
+import { sendOutboundEmail as sendOutboundEmailLocal } from "../send-mail/send-mail-from-generated-mail-from-local.js";
 
 // Load .env file manually if it exists
 const envPath = path.join(process.cwd(), ".env");
@@ -74,9 +74,9 @@ function addLiveSendingLog(message) {
 }
 
 // Folders for local and live emails
-const localMailDir = path.join(process.cwd(), "backend", "rmail", "mails-data", "local");
-const liveMailDir = path.join(process.cwd(), "backend", "rmail", "mails-data", "live");
-const attachmentsDir = path.join(process.cwd(), "backend", "rmail", "mails-data", "attachments");
+const localMailDir = path.join(process.cwd(), "backend", "receive-mail", "mails-data", "local");
+const liveMailDir = path.join(process.cwd(), "backend", "receive-mail", "mails-data", "live");
+const attachmentsDir = path.join(process.cwd(), "backend", "receive-mail", "mails-data", "attachments");
 [localMailDir, liveMailDir, attachmentsDir].forEach(dir => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
@@ -176,11 +176,11 @@ const smtpServer = new SMTPServer({
       );
 
       if (isLocal) {
-        addLocalLog(`💾 Email saved to: rmail/mails-data/local/${fileName}`);
+        addLocalLog(`💾 Email saved to: receive-mail/mails-data/local/${fileName}`);
         addLocalLog(`✅ Email Transaction Complete! Subject: "${subject}"`);
         addLocalLog("__________________________________________________");
       } else {
-        addLiveLog(`💾 Email saved to: rmail/mails-data/live/${fileName}`);
+        addLiveLog(`💾 Email saved to: receive-mail/mails-data/live/${fileName}`);
         addLiveLog(`✅ Email Transaction Complete! Subject: "${subject}"`);
         addLiveLog("__________________________________________________");
       }
@@ -551,7 +551,7 @@ smtpServer.listen(SMTP_PORT, () => {
   console.log(`==========================================`);
 });
 
-app.listen(HTTP_PORT, () => {
+httpServer.listen(HTTP_PORT, () => {
   const envText = IS_LIVE ? "LIVE Environment" : "LOCAL Environment";
   addLocalLog(`Web Console listening on http://localhost:${HTTP_PORT} (${envText})`);
   addLiveLog(`Web Console listening on http://localhost:${HTTP_PORT} (${envText})`);

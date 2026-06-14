@@ -243,7 +243,7 @@ import '../styles/global.css';
 						<span>Send Test Email (Nodemailer)</span>
 					</button>
 				</div>
-				<p class="text-xs text-gray-500 font-mono">Local Console Port: 2525. Emails: rmail/mails-data/local/</p>
+				<p class="text-xs text-gray-500 font-mono">Local Console Port: 2525. Emails: receive-mail/mails-data/local/</p>
 			</footer>
 
 			<!-- Help / Instruction Floating Button -->
@@ -285,7 +285,7 @@ import '../styles/global.css';
 								<li><strong>SMTP Connection:</strong> A local SMTP server runs on port <code class="bg-black/40 px-1.5 py-0.5 rounded text-sky-400 font-mono">2525</code>, listening for incoming email traffic.</li>
 								<li><strong>Parsing Service:</strong> When an email is sent to port 2525, the server captures it and routes the raw stream to <code class="text-white font-semibold">mailparser</code>.</li>
 								<li><strong>Metadata Extraction:</strong> HTML bodies, plain text, headers, and attachments are processed and extracted automatically.</li>
-								<li><strong>JSON File Storage:</strong> The parsed results are stored as individual <code class="bg-black/40 px-1.5 py-0.5 rounded text-sky-400 font-mono">.json</code> transaction records inside the folder <code class="text-gray-200">rmail/mails-data/local/</code>.</li>
+								<li><strong>JSON File Storage:</strong> The parsed results are stored as individual <code class="bg-black/40 px-1.5 py-0.5 rounded text-sky-400 font-mono">.json</code> transaction records inside the folder <code class="text-gray-200">receive-mail/mails-data/local/</code>.</li>
 								<li><strong>Real-time Dashboard:</strong> This dashboard polls the local server API on port <code class="bg-black/40 px-1.5 py-0.5 rounded text-sky-400 font-mono">8081</code> every 3 seconds to fetch new items.</li>
 								<li><strong>Audio Notification:</strong> When a new email arrives, a bell notification plays (<code class="text-gray-200">bell.wav</code>).</li>
 							</ul>

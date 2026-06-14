@@ -132,7 +132,7 @@ If you log out of the SSH terminal, your node script will stop running. To keep 
 npm install -g pm2
 
 # 2. Start the mail receiver script in the background as root (which defaults to Ports 80 and 25)
-sudo pm2 start rmail/rmail.js --name "temp-email"
+sudo pm2 start backend/receive-mail/rmail.js --name "temp-email"
 
 # 3. Save the running process list so it automatically restarts if the VPS rebooted
 pm2 save
