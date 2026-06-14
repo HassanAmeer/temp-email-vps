@@ -19,14 +19,16 @@ Yeh ek custom email server application hai jo aapko apni custom domain (jaise `l
 ## 📚 Documentation & Guides
 Is project ke har hisse ko tafseel se samajhne ke liye alag alag guides banayi gayi hain taake naye developers ko asani ho. Aap neechay diye gaye links par click kar ke unhe parh sakte hain:
 
-1. 📖 **[VPS Setup Guide](./vps-setup.md)**
+1. 📖 **[VPS Setup Guide](./doc-flow/vps-setup.md)**
    - Naye VPS par Node.js, PM2 install karne aur is project ko live karne ka poora tariqa.
-2. 🛡️ **[Spam Prevention Guide](./spam-prevention-guide.md)**
+2. 🛡️ **[Spam Prevention Guide](./doc-flow/spam-prevention-guide.md)**
    - Emails ko reject ya spam hone se bachane ke liye SPF aur DMARC records lagane ka tariqa.
-3. 📤 **[Send Email Flow](./send-mail-flow.md)**
+3. 📤 **[Send Email Flow](./doc-flow/send-mail-flow.md)**
    - Email bhejne ka mukammal flow, zaroori packages, port requirements, aur mukhtalif scenarios.
-4. 📥 **[Receive Email Flow](./receive-mail-flow.md)**
+4. 📥 **[Receive Email Flow](./doc-flow/receive-mail-flow.md)**
    - Email receive karne ka flow, DNS (A aur MX) records, aur zaroori packages ki tafseel.
+5. 🌐 **[Protocols & DNS Records Guide](./doc-flow/protocols.md)**
+   - Tamam zaroori protocols (A, MX, TXT, SPF, DMARC, DKIM, SMTP) ki mukammal tafseel aur unhe implement karne ka tariqa.
 
 ---
 
