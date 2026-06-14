@@ -3,18 +3,18 @@
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": ">=22.12.0"
+    "bun": ">=1.0.0"
   },
   "scripts": {
-    "dev": "cd frontend && astro dev",
-    "build": "cd frontend && astro build",
-    "preview": "cd frontend && astro preview",
-    "start": "serve frontend/dist -l 8080",
-    "mail:start": "node backend/receive-mail/receive-mail.js",
-    "mail:test": "node backend/send-mail-simple/send-mail-local-to-local.js",
-    "mail:send-ip-mail": "node backend/send-mail-simple/send-mail-from-local-to-live-by-ip.js",
-    "mail:generate-dkim": "node backend/scripts/generate-dkim.js",
-    "astro": "cd frontend && astro"
+    "dev": "cd frontend && bun --bun astro dev",
+    "build": "cd frontend && bun --bun astro build",
+    "preview": "cd frontend && bun --bun astro preview",
+    "start": "bunx serve frontend/dist -l 8080",
+    "mail:start": "bun backend/receive-mail/receive-mail.js",
+    "mail:test": "bun backend/send-mail-simple/send-mail-local-to-local.js",
+    "mail:send-ip-mail": "bun backend/send-mail-simple/send-mail-from-local-to-live-by-ip.js",
+    "mail:generate-dkim": "bun backend/scripts/generate-dkim.js",
+    "astro": "cd frontend && bun --bun astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",

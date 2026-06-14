@@ -134,11 +134,11 @@ Agar aap is project ko apne paas run karna chahte hain toh yeh commands chalayen
 
 ```bash
 # 1. Packages install karein
-npm install
+bun install
 
 # 2. Frontend Astro app ko build karein
-npm run build
+bun run build
 
 # 3. Email Server aur Backend API start karein
-npm run mail:start
+bun run mail:start
 ```
