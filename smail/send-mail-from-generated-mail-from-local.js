@@ -12,6 +12,8 @@
 import nodemailer from "nodemailer";
 import dns from "dns";
 import util from "util";
+import fs from "fs";
+import path from "path";
 
 const resolveMx = util.promisify(dns.resolveMx);
 
@@ -56,7 +58,7 @@ export async function sendOutboundEmail({ from, to, subject, text, html, attachm
   log(`[OUTBOUND] Connecting to ${targetMx} on Port 25...`);
 
   // Create a nodemailer transporter targeting the resolved MX server
-  const transporter = nodemailer.createTransport({
+  const transporterOptions = {
     host: targetMx,
     port: 25,
     secure: false, // Port 25 usually uses STARTTLS rather than implicit TLS
@@ -73,7 +75,22 @@ export async function sendOutboundEmail({ from, to, subject, text, html, attachm
       fatal: (meta, msg, ...args) => log(`[SMTP FATAL] ` + util.format(msg, ...args))
     },
     debug: true
-  });
+  };
+
+  // Load DKIM Private Key if available
+  const privateKeyPath = path.join(process.cwd(), 'rmail', 'dkim', 'private.key');
+  if (fs.existsSync(privateKeyPath)) {
+    log(`[OUTBOUND] DKIM private key found, signing email for domain ${from.split("@")[1]}...`);
+    transporterOptions.dkim = {
+      domainName: from.split("@")[1], // Sign with sender's domain
+      keySelector: "default",
+      privateKey: fs.readFileSync(privateKeyPath, 'utf8')
+    };
+  } else {
+    log(`[OUTBOUND WARNING] DKIM private key not found at ${privateKeyPath}. Sending without DKIM signature.`);
+  }
+
+  const transporter = nodemailer.createTransport(transporterOptions);
 
   const mailOptions = {
     from,
