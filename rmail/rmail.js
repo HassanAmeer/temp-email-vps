@@ -4,8 +4,8 @@ import fs from "fs";
 import path from "path";
 import http from "http";
 import nodemailer from "nodemailer";
-import { sendOutboundEmail as sendOutboundEmailLive } from "../smail/send-mail-from-generated-mail-live.js";
-import { sendOutboundEmail as sendOutboundEmailLocal } from "../smail/send-mail-from-generated-mail-local.js";
+import { sendOutboundEmail as sendOutboundEmailLive } from "../smail/send-mail-from-generated-mail-from-live.js";
+import { sendOutboundEmail as sendOutboundEmailLocal } from "../smail/send-mail-from-generated-mail-from-local.js";
 
 // Load .env file manually if it exists
 const envPath = path.join(process.cwd(), ".env");
