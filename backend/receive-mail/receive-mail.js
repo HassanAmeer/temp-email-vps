@@ -86,6 +86,7 @@ const attachmentsDir = path.join(process.cwd(), "backend", "storage", "media");
 // ==========================================
 const smtpServer = new SMTPServer({
   authOptional: true,
+  disabledCommands: ["STARTTLS"],
   onConnect(session, callback) {
     const ip = session.remoteAddress;
     const isLocal = ip === "127.0.0.1" || ip === "::1" || ip === "::ffff:127.0.0.1";

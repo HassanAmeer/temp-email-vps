@@ -40,6 +40,7 @@ function authenticateUser(username, password) {
 const server = new SMTPServer({
   // Secure settings
   secure: false, // We will use STARTTLS if the client supports it
+  disabledCommands: ["STARTTLS"],
   authOptional: false, // Force authentication
   
   // onAuth is called when a client tries to login
