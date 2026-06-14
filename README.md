@@ -16,6 +16,27 @@ Yeh ek custom email server application hai jo aapko apni custom domain (jaise `l
 
 ---
 
+## 📸 Console Screenshots (Dashboard Preview)
+
+Aap neechay diye gaye screenshots se is custom email dashboard aur console interface ka preview dekh sakte hain:
+
+### 1. Main Home Dashboard
+![Main Home Dashboard](./demo/1.png)
+
+### 2. Local Console Dashboard
+![Local Console Dashboard](./demo/2.png)
+
+### 3. Inbound / Outbound SMTP Logs
+![Inbound / Outbound SMTP Logs](./demo/3.png)
+
+### 4. Outbound SMTP Credentials / Relay Logs
+![Outbound SMTP Credentials / Relay Logs](./demo/4.png)
+
+### 5. Email Rich Text / Raw JSON Viewer
+![Email Rich Text / Raw JSON Viewer](./demo/5.png)
+
+---
+
 ## 🏗️ Architecture Flow (Kaam Kaise Karta Hai?)
 
 ```mermaid
