@@ -16,6 +16,26 @@ Yeh ek custom email server application hai jo aapko apni custom domain (jaise `l
 
 ---
 
+## 📊 Current Port Usage (Kaunsi Port Kahan Use Hoti Hai?)
+
+### 🔴 Live Environment (`live=true`)
+| Service | Port | Description |
+|---------|------|-------------|
+| **Web Dashboard (UI)** | `80` (or `8080`) | Live browser interface chalane ke liye. |
+| **Receive Email (Inbound)** | `25` | Gmail/Yahoo se standard emails receive karne ke liye. |
+| **Send Email (Outbound)** | `25` | Hamare code se internet par emails bhejne ke liye. |
+| **External App Relay (Auth)** | `2525` | `on-smtp` server ke zariye 3rd party apps (Node/PHP) ko connect karne ke liye. |
+
+### 🔵 Local Environment (`live=false`)
+| Service | Port | Description |
+|---------|------|-------------|
+| **Web Dashboard (UI)** | `8081` | Local development interface (taake port 80 se conflict na ho). |
+| **Receive Email (Inbound)** | `2525` | Local machines aam taur par port 25 block karti hain, isliye local par 2525 use hoti hai. |
+| **Send Email (Outbound)** | `25` | Local testing ke doran bhi hamara code port 25 par hi send karne ki koshish karta hai. |
+| **External App Relay (Auth)** | `2525` | `on-smtp` server ke zariye external apps connect karne ke liye. |
+
+---
+
 ## 📚 Documentation & Guides
 Is project ke har hisse ko tafseel se samajhne ke liye alag alag guides banayi gayi hain taake naye developers ko asani ho. Aap neechay diye gaye links par click kar ke unhe parh sakte hain:
 
