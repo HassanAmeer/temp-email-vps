@@ -330,7 +330,7 @@ import '../styles/global.css';
 									</p>
 									<p>🌐 <strong class="text-gray-300">Why HTTP Protocol & Port 8081?</strong> The frontend dashboard fetches email JSON data via the HTTP protocol. Running HTTP on port <code class="bg-black/30 px-1 py-0.5 rounded text-emerald-400 font-mono">8081</code> separates web API requests from incoming mail traffic, preventing database lockups or latency issues.</p>
 									<p>📂 <strong class="text-gray-300">Where are these configured in the code?</strong>
-										<br>• The ports are defined in <a href="file:///Users/mac/Documents/react/temp-email/backend/receive-mail/rmail.js#L8-L9" class="text-emerald-400 hover:underline">receive-mail/rmail.js (lines 8-9)</a>.
+										<br>• The ports are defined in <a href="file:///Users/mac/Documents/react/temp-email/backend/receive-mail/receive-mail.js#L8-L9" class="text-emerald-400 hover:underline">receive-mail/receive-mail.js (lines 8-9)</a>.
 										<br>• The API URL is configured in the script tag in <a href="file:///Users/mac/Documents/react/temp-email/src/pages/live.astro#L315-L316" class="text-emerald-400 hover:underline">src/pages/live.astro (lines 315-316)</a>.
 									</p>
 								</div>
@@ -358,7 +358,7 @@ import '../styles/global.css';
 								<li>
 									<strong class="text-white text-sm block mb-1">Setup Persistent Process with PM2</strong>
 									Deploy your code, install dependencies, and run the server in the background using PM2 so it stays active when you log off:
-									<pre class="bg-black/50 p-2.5 rounded font-mono text-[10px] text-emerald-300 mt-1.5 select-all">{"sudo npm install -g pm2\npm2 start backend/receive-mail/rmail.js --name \"temp-email\"\npm2 save && pm2 startup"}</pre>
+									<pre class="bg-black/50 p-2.5 rounded font-mono text-[10px] text-emerald-300 mt-1.5 select-all">{"sudo npm install -g pm2\npm2 start backend/receive-mail/receive-mail.js --name \"temp-email\"\npm2 save && pm2 startup"}</pre>
 								</li>
 								<li>
 									<strong class="text-white text-sm block mb-1">Connect Your Domain (DNS Settings)</strong>
