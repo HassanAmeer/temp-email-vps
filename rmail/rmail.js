@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import http from "http";
 import nodemailer from "nodemailer";
+import { sendOutboundEmail } from "../smail/send-mail-from-generated-email.js";
 
 // Load .env file manually if it exists
 const envPath = path.join(process.cwd(), ".env");
@@ -328,6 +329,31 @@ const httpServer = http.createServer((req, res) => {
         logSender(`✅ Test Send Success: ${info.response}`);
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ success: true, response: info.response }));
+      }
+    });
+    return;
+  }
+
+  // API 8: Send Custom Outbound Email
+  if (req.url === "/api/send-email" && req.method === "POST") {
+    let body = "";
+    req.on("data", chunk => body += chunk.toString());
+    req.on("end", async () => {
+      try {
+        const data = JSON.parse(body);
+        const { from, to, subject, text, html } = data;
+        
+        addLiveSendingLog(`Initiating custom outbound email from ${from} to ${to}`);
+        
+        await sendOutboundEmail({ from, to, subject, text, html });
+        
+        addLiveSendingLog(`✅ Successfully sent custom email from ${from} to ${to}`);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ success: true }));
+      } catch (error) {
+        addLiveSendingLog(`❌ Failed to send custom email: ${error.message}`);
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ success: false, error: error.message }));
       }
     });
     return;
