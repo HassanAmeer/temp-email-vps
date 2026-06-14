@@ -345,7 +345,14 @@ const httpServer = http.createServer((req, res) => {
         
         addLiveSendingLog(`Initiating custom outbound email from ${from} to ${to}`);
         
-        await sendOutboundEmail({ from, to, subject, text, html });
+        await sendOutboundEmail({ 
+          from, 
+          to, 
+          subject, 
+          text, 
+          html, 
+          logCallback: (msg) => addLiveSendingLog(msg) 
+        });
         
         addLiveSendingLog(`✅ Successfully sent custom email from ${from} to ${to}`);
         res.writeHead(200, { "Content-Type": "application/json" });
