@@ -65,3 +65,6 @@ Neechay har Protocol aur Record ki tafseel, wajah, aur pros/cons diye gaye hain.
 
 > **💡 Important Note For Multiple Domains:**
 > Aapko har nayi domain ke liye nayi DKIM key generate karne ki zaroorat **nahi** hai. VPS ke andar majood ek hi "Private Key" hazaron domains ko sign kar sakti hai. Jab bhi koi nayi domain is server ke sath attach karni ho, toh bas yahi same DKIM TXT (Public Key) record us nayi domain ke DNS mein copy-paste kar dein. Hamara code automatically us domain ko sign kar dega!
+> 
+> **⚠️ WARNING (Dobara Generate Karne ka Nuqsan):**
+> Agar aap `generate-dkim.js` ko dobara chalayenge toh purani Private Key delete ho jayegi. Is se purani Public Key kaam karna chor degi aur aapki emails fail hone lagengi (Spam mein jayengi). Jab tak intehai zaroori na ho, DKIM keys dobara generate na karein. Agar karein toh sab domains ke DNS records lazmi update karein!
