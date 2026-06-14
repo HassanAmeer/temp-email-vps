@@ -19,23 +19,25 @@ Neechay diye gaye flowchart se aap iska poora safar samajh sakte hain:
 
 ```mermaid
 sequenceDiagram
-    participant App as External App (Laravel/Node)
-    participant VPS as Our VPS (on-smtp server)
-    participant Dest as Gmail / Yahoo
+    participant App as External App (Laravel/Node)<br/>[Live ya Local Server]
+    participant VPS as Our VPS Server<br/>(on-smtp module)
+    participant Dest as Final Inbox<br/>(Gmail / Yahoo)
 
-    Note over App,VPS: Safar 1 (Port 2525)
-    App->>VPS: Connect via Port 2525
+    Note over App,VPS: Safar 1: External App to Our VPS
+    App->>VPS: Connect via Port 2525 (ya 587)
+    Note over App,VPS: Yeh port (2525) Local ya Live dono jagah same use hogi kyunke ISPs ise block nahi karte.
     VPS-->>App: Ask for Username/Password
     App->>VPS: Send Credentials (credentials.json)
     VPS-->>App: Authentication Successful!
     App->>VPS: Submit Email Data (To, From, Body)
     
-    Note over VPS: VPS signs email with DKIM
+    Note over VPS: VPS dynamically adds DKIM Signature
     
-    Note over VPS,Dest: Safar 2 (Port 25)
-    VPS->>Dest: Connect via Port 25 (Outbound)
+    Note over VPS,Dest: Safar 2: Our VPS to Final Destination
+    VPS->>Dest: Deliver via Port 25 (Outbound)
+    Note over VPS,Dest: Duniya ka har inbox sirf Port 25 par email qabool karta hai.
     Dest-->>VPS: Receive & Verify DKIM
-    VPS->>Dest: Deliver Email
+    VPS->>Dest: Email Delivered to Inbox!
 ```
 
 Email bhejte waqt do (2) safar (legs) hote hain:

@@ -20,7 +20,7 @@ Yeh ek custom email server application hai jo aapko apni custom domain (jaise `l
 
 ```mermaid
 graph LR
-    A[Laravel/Node App] -- "Port 2525 (Auth)" --> B(Our VPS Server)
+    A[Laravel/Node App<br>Local ya Live] -- "Port 2525 (Auth)" --> B(Our VPS Server<br>on-smtp module)
     B -- "Adds DKIM Signature" --> B
     B -- "Port 25 (Outbound)" --> C[Gmail / Yahoo Inbox]
     
