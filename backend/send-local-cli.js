@@ -9,7 +9,7 @@
  * ------------------------------------------------------------------
  */
 import readline from "readline";
-import { sendOutboundEmail } from "./send-mail/send-mail-from-generated-mail-from-local.js";
+import { sendOutboundEmail } from "./send-mail-simple/send-mail-from-generated-mail-from-local.js";
 
 const rl = readline.createInterface({
   input: process.stdin,

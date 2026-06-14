@@ -2,7 +2,7 @@ import { SMTPServer } from 'smtp-server';
 import { simpleParser } from 'mailparser';
 import fs from 'fs';
 import path from 'path';
-import { sendOutboundEmail } from '../send-mail/send-mail-from-generated-mail-from-live.js';
+import { sendOutboundEmail } from '../send-mail-simple/send-mail-from-generated-mail-from-live.js';
 
 const PORT = 2525; // Port for outbound SMTP Relay (Client to VPS)
 const credsPath = path.join(process.cwd(), 'backend', 'send-mail-by-smtp', 'credentials.json');
