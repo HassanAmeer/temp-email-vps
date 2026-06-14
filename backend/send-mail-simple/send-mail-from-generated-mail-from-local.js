@@ -78,7 +78,7 @@ export async function sendOutboundEmail({ from, to, subject, text, html, attachm
   };
 
   // Load DKIM Private Key if available
-  const privateKeyPath = path.join(process.cwd(), 'backend', 'dkim-for-send-mail', 'private.key');
+  const privateKeyPath = path.join(process.cwd(), 'backend', 'dkim-key-for-send-mail', 'private.key');
   if (fs.existsSync(privateKeyPath)) {
     log(`[OUTBOUND] DKIM private key found, signing email for domain ${from.split("@")[1]}...`);
     transporterOptions.dkim = {
